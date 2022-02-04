@@ -26,10 +26,13 @@ mapx=0
 mapy=0
 
 
-for row in range(1,3):
-    for column in range(1,5):
-        print(sheet.cell(row,column).value)
-
+row_number=0
+column_number=0
+for row in sheet:
+    row_number+=1
+    for column in row:
+        column_number+=1
+        print(sheet.cell(row_number,column_number).value)
 
 def look(roomx,roomy):
 
@@ -46,7 +49,7 @@ for worksheet in workbook:
 
 while running:
 
-    a = input('what will you do /n')
+    a = input('what will you do')
 
     if a == 'look':
         look(3,1)

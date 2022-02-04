@@ -13,6 +13,8 @@ library=workbook.active
 x=0
 y=0
 
+running = True
+
 
 #sheet.append(["ID",'Room','Room Description', 'Paths'])
 print(library.cell(1,1))
@@ -39,6 +41,15 @@ look(3,1)
 for worksheet in workbook:
     print(worksheet)
 
+
+
+
+while running:
+
+    a = input('what will you do /n')
+
+    if a == 'look':
+        look(3,1)
 
 
 

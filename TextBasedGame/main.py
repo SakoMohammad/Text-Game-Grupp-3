@@ -14,13 +14,15 @@ library=workbook.active
 
 x=3
 y=2
+room_description= 3
 
 running = True
 
 
 
 #sheet.append(["ID",'Room','Room Description', 'Paths'])
-print(library.cell(1,1))
+
+print(str(library.cell(1,1).value))
 
 workbook.create_sheet('PlayerInfo')
 
@@ -37,11 +39,11 @@ def goThroughSheet(thesheet):
             column_number+=1
             print(thesheet.cell(row_number,column_number).value)
 
-def look(roomx,roomy):
+def look(room_value):
      
-    print(sheet.cell(3,1).value)
+    print(str(sheet.cell(room_description,1).value))
 
-def save():# här kommer spar funktionen
+def save(direction):# här kommer spar funktionen
     pass
 
 def move():#- här kommer rörelse funktionen
@@ -56,12 +58,22 @@ while running:
     a = input()
     if a == 'look':
         print('works')
+        if str(library.cell(1,1).value) == "ID":
+            print('can string')
+
 
     if a == 'save':
         save()
 
     if re.search('move ',a):
-        move(a)
+        text = a
+        text = re.sub('move ', '', text)
+
+        print (text)
+        move(text)
+
+    if a == 'quit':
+       running= False
 
 
 

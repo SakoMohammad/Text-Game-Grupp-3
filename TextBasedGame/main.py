@@ -32,13 +32,17 @@ mapy=0
 
 def goThroughSheet(thesheet):
     main_map=[]
+    example_empty= thesheet.cell(1000,1000).value
     row_number=0
     column_number=0
     for row in sheet:
         row_number+=1
         column_rooms=[]
         for column in row:
-            column_rooms.append(thesheet.cell(row_number,column_number).value)
+            if thesheet.cell(row_number,column_number).value== example_empty:
+                column_rooms.append('0')
+            else:
+                column_rooms.append(str(thesheet.cell(row_number, column_number).value))
             column_number+=1
             print(thesheet.cell(row_number,column_number).value)
         main_map.append(column_rooms)
@@ -56,7 +60,7 @@ def move():#- här kommer rörelse funktionen
 
 
 
-
+print(goThroughSheet(sheet))
 
 while running:
 

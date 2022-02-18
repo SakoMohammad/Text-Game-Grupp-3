@@ -5,11 +5,11 @@ import re
 
 
 
-workbook = load_workbook("hello_world.xlsx")
-sheet = workbook['Sheet']
-GameMap = workbook['GameMap']
-RoomData = workbook['RoomData']
-library=workbook.active
+workbook = load_workbook("Platsnamn_textspel.xlsx")
+sheet = workbook['Rum']
+GameMap = workbook['Karta']
+
+
 
 
 x=3
@@ -22,22 +22,26 @@ running = True
 
 #sheet.append(["ID",'Room','Room Description', 'Paths'])
 
-print(str(library.cell(1,1).value))
+
 
 workbook.create_sheet('PlayerInfo')
 
-library.cell(1,1)
+
 mapx=0
 mapy=0
 
 def goThroughSheet(thesheet):
+    main_map=[]
     row_number=0
     column_number=0
-    for row in sheet:
+    for row in thesheet:
         row_number+=1
+        column_rooms=[]
         for column in row:
             column_number+=1
-            print(thesheet.cell(row_number,column_number).value)
+            column_rooms.append(str(thesheet.cell(row_number, column_number).value))
+        main_map.append(column_rooms)
+    return main_map
 
 def look(room_value):
      
@@ -50,6 +54,8 @@ def move():#- här kommer rörelse funktionen
     pass
 
 
+for row in goThroughSheet(sheet):
+    print(row)
 
 
 
@@ -57,9 +63,7 @@ while running:
 
     a = input()
     if a == 'look':
-        print('works')
-        if str(library.cell(1,1).value) == "ID":
-            print('can string')
+       look()
 
 
     if a == 'save':

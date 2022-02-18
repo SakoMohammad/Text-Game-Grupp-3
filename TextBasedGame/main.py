@@ -73,6 +73,9 @@ for row in goThroughSheet(GameMap):
 
 while running:
 
+    main_map= goThroughSheet(GameMap)
+    player_position = main_map[y][x]
+
     a = input()
     if a == 'look':
        look()

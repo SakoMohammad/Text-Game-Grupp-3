@@ -14,7 +14,7 @@ library=workbook.active
 
 x=3
 y=2
-room_description= 3
+room_description= 2
 
 running = True
 
@@ -22,11 +22,15 @@ running = True
 
 
 
-print(str(library.cell(1,1).value))
+
+
+
+#sheet.append(["1",'hallway','you see a brightly lit hallway infront of you', 'North,South'])
 
 workbook.create_sheet('PlayerInfo')
 
-library.cell(1,1)
+
+
 mapx=0
 mapy=0
 
@@ -56,8 +60,11 @@ def save(direction):  # här kommer spar funktionen
 def move():  # här kommer rörelse funktionen
     pass
 
+a=goThroughSheet(sheet)
 
-print(str(goThroughSheet(sheet)))
+for row in a:
+    print(str(row))
+
 
 while running:
 

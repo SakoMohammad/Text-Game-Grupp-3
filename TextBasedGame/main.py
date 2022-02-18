@@ -39,7 +39,7 @@ def goThroughSheet(thesheet):
         column_rooms=[]
         for column in row:
             column_number+=1
-            column_rooms.append(str(thesheet.cell(row_number, column_number).value))
+            column_rooms.append(str(column.value))
         main_map.append(column_rooms)
     return main_map
 
@@ -66,7 +66,7 @@ def move(direction):#- här kommer rörelse funktionen
         print('Enter a valid direction')
 
 
-for row in goThroughSheet(sheet):
+for row in goThroughSheet(GameMap):
     print(row)
 
 

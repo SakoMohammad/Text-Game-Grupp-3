@@ -46,8 +46,21 @@ def look(room_value):
 def save(direction):# här kommer spar funktionen
     pass
 
-def move():#- här kommer rörelse funktionen
-    pass
+def move(direction):#- här kommer rörelse funktionen
+    global y
+    global x
+    direction = direction.lower()
+    if direction == 'north':
+        y -= 1
+    elif direction == 'west':
+        x -= 1
+    elif direction == 'east':
+        x += 1
+    elif direction == 'south':
+        y += 1
+
+    else:
+        print("Enter a valid direction")
 
 
 
@@ -68,8 +81,6 @@ while running:
     if re.search('move ',a):
         text = a
         text = re.sub('move ', '', text)
-
-        print (text)
         move(text)
 
     if a == 'quit':

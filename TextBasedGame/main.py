@@ -72,6 +72,8 @@ def main():
     room_IDs = goThroughSheet(sheet)
     main_map = goThroughSheet(GameMap)
     player_position = main_map[y][x]
+    current_room_type = room_IDs[int(float(player_position))]
+
     while running:
 
 
@@ -97,10 +99,11 @@ def main():
 
 
         player_position = main_map[y][x]
-
+        current_room_type = room_IDs[int(float(player_position))]
         print(player_position)
 
         print(str(x) + ' ' + str(y))
+        print(str(current_room_type))
 
 
 

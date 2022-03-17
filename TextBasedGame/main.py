@@ -58,8 +58,8 @@ def move(x, y, direction, valid_directions):  # int, int,string,list
 # print(goThroughSheet(GameMap))
 
 def main():  # where the game is actually put together
-    x = 0  # the starting x value
-    y = 1  # the starting y value
+    x =  wsSave['A1']  # the starting x value
+    y =  wsSave['A2']  # the starting y value
     # some starting values to load things into memory
     room_description = 1
     running = True

@@ -10,8 +10,6 @@ sheet = workbook['Rum']
 GameMap = workbook['Karta']
 wsSave = workbook['Sparande']
 
-room_description= 1
-
 
 
 
@@ -19,7 +17,7 @@ room_description= 1
 
 
 
-def goThroughSheet(thesheet):
+def goThroughSheet(thesheet): #a sheet from the workbook
     # goes through a sheet and puts every value into a 2d matrix (I think i can use that word)
     main_map=[] # the matrix that is going to be returned
     #row_number=0
@@ -33,47 +31,49 @@ def goThroughSheet(thesheet):
         main_map.append(column_rooms)
     return main_map
 
-def look(room_value):
-     
+def look(room_value): #list
+    #takes the current room type you are in and gives the description of that room type
     print(str(room_value[room_description]))
 
-def save(x,y):#- här kommer save funktionen
-
+def save(x,y):
+    #takes 
     wsSave['A1'] = x
     workbook.save("Platsnamn textspel.xlsx")
     print('Your game progress has now been saved')
 
-def move(x,y,direction,valid_directions):#- här kommer rörelse funktionen
-
-    direction.lower()
-    if direction =='north'and direction in valid_directions:
+def move(x,y,direction,valid_directions): #int, int,string,list
+    #the movement function, takes the current position, checks which direction you want to move, checks if it's possible and returns the new position.
+    
+    direction.capitalize() #makes sure the string is in the right format
+    if direction =='North'and direction in valid_directions:
         y-=1
-    elif direction =='south' and direction in valid_directions:
+    elif direction =='South' and direction in valid_directions:
         y+=1
-    elif direction =='east' and direction in valid_directions:
+    elif direction =='East' and direction in valid_directions:
         x+=1
-    elif direction =='west' and direction in valid_directions:
+    elif direction =='West' and direction in valid_directions:
         x-=1
     else:
         print('Enter a valid direction')
-    return x , y
+    return x , y 
 
 
 #print(goThroughSheet(GameMap))
 
-def main():
-    x = 0
-    y = 1
-    room_description = 3
-
+def main(): # where the game is actually put together
+    x = 0 #the starting x value
+    y = 1 #the starting y value
+    #some starting values to load things into memory
+    room_description = 1
     running = True
-    room_IDs = goThroughSheet(sheet)
-    main_map = goThroughSheet(GameMap)
-    player_position = main_map[y][x]
-    current_room_type = room_IDs[int(float(player_position))]
+    room_IDs = goThroughSheet(sheet)#takes the sheet with room ids and puts them in a list
+    main_map = goThroughSheet(GameMap)# takes the map from the map sheet and puts them in a 
+    #these 2 are below are going to change in the loop
+    player_position = main_map[y][x] #the player position is based on the mainmap
+    current_room_type = room_IDs[int(float(player_position))]#takes the position 
 
-    while running:
-        possible_directions= current_room_type[2].split(" ")
+    while running:# the main game loop where you will be making decisions
+        possible_directions= current_room_type[2].split(" ")# the string with possible directions is split in a list
 
 
         a = input()

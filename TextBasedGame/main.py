@@ -5,11 +5,12 @@ import re
 
 
 
-workbook = load_workbook("Platsnamn_textspel.xlsx")
+workbook = load_workbook("Platsnamn textspel.xlsx")
 sheet = workbook['Rum']
 GameMap = workbook['Karta']
+wsSave = workbook['sparande']
 
-
+room_description= 1
 
 
 
@@ -17,12 +18,6 @@ GameMap = workbook['Karta']
 #sheet.append(["ID",'Room','Room Description', 'Paths'])
 
 
-
-workbook.create_sheet('PlayerInfo')
-
-
-mapx=0
-mapy=0
 
 def goThroughSheet(thesheet):
     # goes through a sheet and puts every value into a 2d matrix (I think i can use that word)
@@ -40,10 +35,13 @@ def goThroughSheet(thesheet):
 
 def look(room_value):
      
-    print(str(sheet.cell(room_description,1).value))
+    print(room_value[room_description,1])
 
-def save(direction):# här kommer spar funktionen
-    pass
+def save(x,y):#- här kommer save funktionen
+    currentPlayerPosition = (x, y)
+    wsSave['A1'] = currentPlayerPosition
+    workbook.save("Platsnamn textspel.xlsx")
+    print('Your game progress has now been saved')
 
 def move(x,y,direction):#- här kommer rörelse funktionen
 

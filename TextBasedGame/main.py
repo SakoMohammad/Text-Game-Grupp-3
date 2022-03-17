@@ -8,7 +8,7 @@ import re
 workbook = load_workbook("Platsnamn textspel.xlsx")
 sheet = workbook['Rum']
 GameMap = workbook['Karta']
-wsSave = workbook['sparande']
+wsSave = workbook['Sparande']
 
 room_description= 1
 
@@ -35,24 +35,24 @@ def goThroughSheet(thesheet):
 
 def look(room_value):
      
-    print(room_value[room_description,1])
+    print(str(room_value[room_description]))
 
 def save(x,y):#- här kommer save funktionen
-    currentPlayerPosition = (x, y)
-    wsSave['A1'] = currentPlayerPosition
+
+    wsSave['A1'] = x
     workbook.save("Platsnamn textspel.xlsx")
     print('Your game progress has now been saved')
 
-def move(x,y,direction):#- här kommer rörelse funktionen
+def move(x,y,direction,valid_directions):#- här kommer rörelse funktionen
 
     direction.lower()
-    if direction =='north':
+    if direction =='north'and direction in valid_directions:
         y-=1
-    elif direction =='south':
+    elif direction =='south' and direction in valid_directions:
         y+=1
-    elif direction =='east':
+    elif direction =='east' and direction in valid_directions:
         x+=1
-    elif direction =='west':
+    elif direction =='west' and direction in valid_directions:
         x-=1
     else:
         print('Enter a valid direction')
@@ -73,16 +73,16 @@ def main():
     current_room_type = room_IDs[int(float(player_position))]
 
     while running:
-
+        possible_directions= current_room_type[2].split(" ")
 
 
         a = input()
         if a == 'look':
-           look()
+           look(current_room_type)
 
 
         if a == 'save':
-            save()
+            save(x,y)
 
         if re.search('move ',a):
             text = a
@@ -90,7 +90,7 @@ def main():
 
 
 
-            x,y = move(x,y,text)
+            x,y = move(x,y,text,possible_directions)
             print(text)
         if a == 'quit':
            running= False
@@ -98,10 +98,10 @@ def main():
 
         player_position = main_map[y][x]
         current_room_type = room_IDs[int(float(player_position))]
-        print(player_position)
+        #print(player_position)
 
-        print(str(x) + ' ' + str(y))
-        print(str(current_room_type))
+        #print(str(x) + ' ' + str(y))
+        #print(str(current_room_type))
 
 
 

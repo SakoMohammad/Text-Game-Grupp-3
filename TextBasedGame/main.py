@@ -18,16 +18,12 @@ wsSave = workbook['Sparande']
 
 
 def goThroughSheet(thesheet): #a sheet from the workbook
-    # goes through a sheet and puts every value into a 2d matrix (I think i can use that word)
-    main_map=[] # the matrix that is going to be returned
-    #row_number=0
-    #column_number=0
+    # goes through a sheet and makes a list of x positions for every y position, returns a list of lists that can be read as a 2d grid
+    main_map=[] 
     for row in thesheet:
-        #row_number+=1
-        column_rooms=[]
+        column_rooms=[] #list of x values
         for column in row:
-            #column_number+=1
-            column_rooms.append(str(column.value))#adds a cell from sheet row to the lists row
+            column_rooms.append(str(column.value)) #add x value to list
         main_map.append(column_rooms)
     return main_map
 
@@ -35,9 +31,10 @@ def look(room_value): #list
     #takes the current room type you are in and gives the description of that room type
     print(str(room_value[room_description]))
 
-def save(x,y):
-    #takes 
+def save(x,y):#ints
+    #takes the x,y positions and saves them into their own sheet
     wsSave['A1'] = x
+    wsSace['A2'] = y
     workbook.save("Platsnamn textspel.xlsx")
     print('Your game progress has now been saved')
 
@@ -45,7 +42,7 @@ def move(x,y,direction,valid_directions): #int, int,string,list
     #the movement function, takes the current position, checks which direction you want to move, checks if it's possible and returns the new position.
     
     direction.capitalize() #makes sure the string is in the right format
-    if direction =='North'and direction in valid_directions:
+    if direction =='North'and direction in valid_directions: #if it has the right name and is in the list of availible directions
         y-=1
     elif direction =='South' and direction in valid_directions:
         y+=1

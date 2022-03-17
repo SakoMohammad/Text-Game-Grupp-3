@@ -10,7 +10,7 @@ sheet = workbook['Rum']
 GameMap = workbook['Karta']
 wsSave = workbook['Sparande']
 
-
+room_description = 1 #for room positions
 
 
 #sheet.append(["ID",'Room','Room Description', 'Paths'])

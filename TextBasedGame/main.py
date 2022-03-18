@@ -5,16 +5,15 @@ import re
 
 
 
-workbook = load_workbook("Platsnamn textspel.xlsx")
+workbook = load_workbook("Platsnamn textspel.xlsx") # kalkylarken
+# arbetsblad
 sheet = workbook['Rum']
 GameMap = workbook['Karta']
 wsSave = workbook['Sparande']
 
 room_description = 1  # for room positions
 
-wsSave['A1'] = 0
-wsSave['A2'] = 1
-workbook.save("Platsnamn textspel.xlsx")
+
 #sheet.append(["ID",'Room','Room Description', 'Paths'])
 
 

@@ -39,7 +39,6 @@ def save(x, y):  # ints
     workbook.save("Platsnamn textspel.xlsx")
     print('Your game progress has now been saved')
 
-def move(x,y,direction,valid_directions):#- här kommer rörelse funktionen
 
 def move(x, y, direction, valid_directions):  # int, int,string,list
     # the movement function, takes the current position, checks which direction you want to move, checks if it's possible and returns the new position.

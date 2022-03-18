@@ -12,7 +12,9 @@ wsSave = workbook['Sparande']
 
 room_description = 1  # for room positions
 
-
+wsSave['A1'] = 0
+wsSave['A2'] = 1
+workbook.save("Platsnamn textspel.xlsx")
 #sheet.append(["ID",'Room','Room Description', 'Paths'])
 
 
@@ -73,8 +75,6 @@ def main():  # where the game is actually put together
     player_position = main_map[y][x]  # the player position is based on the mainmap
     current_room_type = room_IDs[int(float(player_position))]  # takes the position
 
-    while running:  # the main game loop where you will be making decisions
-        possible_directions = current_room_type[2].split(" ")  # the string with possible directions is split in a list
 
     print('Welcome to our game. Your goal is to leave the building that you are trapped in.')
     while running:
@@ -103,7 +103,7 @@ def main():  # where the game is actually put together
         if a == 'quit':
            running= False
 
-        if str(current_room_type[0]) == '10':
+        if current_room_type[0] == '10':
             print('Congratulations you win!')
             running = False
         player_position = main_map[y][x]

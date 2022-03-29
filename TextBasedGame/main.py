@@ -3,7 +3,10 @@ from openpyxl.utils import get_column_letter
 
 import re
 
-workbook = load_workbook("Platsnamn textspel.xlsx")
+
+
+workbook = load_workbook("Platsnamn textspel.xlsx") # kalkylarken
+# arbetsblad
 sheet = workbook['Rum']
 GameMap = workbook['Karta']
 wsSave = workbook['Sparande']
@@ -11,7 +14,7 @@ wsSave = workbook['Sparande']
 room_description = 1  # for room positions
 
 
-# sheet.append(["ID",'Room','Room Description', 'Paths'])
+#sheet.append(["ID",'Room','Room Description', 'Paths'])
 
 
 def goThroughSheet(thesheet):  # a sheet from the workbook
@@ -52,16 +55,18 @@ def move(x, y, direction, valid_directions):  # int, int,string,list
         x -= 1
     else:
         print('Enter a valid direction')
-    return x, y
+    return x , y
 
 
-# print(goThroughSheet(GameMap))
+#print(goThroughSheet(GameMap))
 
 def main():  # where the game is actually put together
     x = int(wsSave['A1'].value)  # the starting x value
     y = int(wsSave['A2'].value)  # the starting y value
     # some starting values to load things into memory
     room_description = 1
+
+
     running = True
     room_IDs = goThroughSheet(sheet)  # takes the sheet with room ids and puts them in a list
     main_map = goThroughSheet(GameMap)  # takes the map from the map sheet and puts them in a
@@ -69,36 +74,50 @@ def main():  # where the game is actually put together
     player_position = main_map[y][x]  # the player position is based on the mainmap
     current_room_type = room_IDs[int(float(player_position))]  # takes the position
 
-    while running:  # the main game loop where you will be making decisions
-        possible_directions = current_room_type[2].split(" ")  # the string with possible directions is split in a list
+
+    print('Welcome to our game. Your goal is to leave the building that you are trapped in.')
+    while running:
+        possible_directions= current_room_type[2].split(" ")
+        print('you can move ', end="")
+        for directions in possible_directions:
+            print(', '+str(directions),end='')
+        print('')
 
         a = input()
         if a == 'look':
-            look(current_room_type)
+           look(current_room_type)
+
 
         if a == 'save':
-            save(x, y)
+            save(x,y)
 
-        if re.search('move ', a):
+        if re.search('move ',a):
             text = a
             text = re.sub('move ', '', text)
 
-            x, y = move(x, y, text, possible_directions)
+
+
+            x,y = move(x,y,text,possible_directions)
             print(text)
         if a == 'quit':
-            running = False
+           running= False
 
+        if current_room_type[0] == '10':
+            print('Congratulations you win!')
+            running = False
         player_position = main_map[y][x]
         current_room_type = room_IDs[int(float(player_position))]
-        # print(player_position)
+        #print(player_position)
 
-        # print(str(x) + ' ' + str(y))
-        # print(str(current_room_type))
+        #print(str(x) + ' ' + str(y))
+        #print(str(current_room_type))
+
+
+
 
 
 main()
-# sheet.append(["1",'hallway','you see a brightly lit hallway infront of you', 'North,South'])
+#sheet.append(["1",'hallway','you see a brightly lit hallway infront of you', 'North,South'])
 
-# workbook.save("hello_world.xlsx")
+#workbook.save("hello_world.xlsx")
 
-#print(goThroughSheet(GameMap))
